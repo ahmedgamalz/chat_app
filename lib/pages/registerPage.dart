@@ -1,17 +1,17 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/customWidgets/customButton.dart';
 import 'package:chat_app/customWidgets/customTextField.dart';
-import 'package:chat_app/pages/RegisterPage.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+  static String id = 'register';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 70,
@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 13, right: 245, bottom: 7, top: 25),
             child: Text(
-              'Login',
+              'Register',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 35,
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 16, right: 200, bottom: 10),
             child: Text(
-              'Please sign in to continue',
+              'Please sign up to continue',
               style: TextStyle(color: Colors.grey, fontSize: 15),
             ),
           ),
@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
             height: 20,
           ),
           CustomButton(
-            text: 'LOGIN',
+            text: 'REGISTER',
           ),
           SizedBox(
             height: 140,
@@ -68,15 +68,15 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Don\'t have an account ?',
+                'Already have an account ?',
                 style: TextStyle(color: Colors.grey),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RegisterPage.id);
+                  Navigator.pop(context);
                 },
                 child: Text(
-                  'register',
+                  'login',
                   style: TextStyle(color: Colors.white),
                 ),
               )
