@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(
+          const Spacer(
             flex: 3,
           ),
           Padding(
@@ -22,14 +22,20 @@ class LoginPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 5, right: 200, bottom: 27),
-            child: Text('Please sign in to continue'),
+            child: Text(
+              'Please sign in to continue',
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextFormField(
               decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 23, horizontal: 20),
                   filled: true,
                   fillColor: Colors.white,
                   hintText: 'Email',
@@ -40,8 +46,11 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextFormField(
               decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 23, horizontal: 20),
                   filled: true,
                   fillColor: Colors.white,
                   hintText: 'Password',
