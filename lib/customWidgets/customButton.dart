@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   CustomButton({
+    this.onPressed,
     this.text,
     super.key,
   });
+  VoidCallback? onPressed;
   String? text;
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class CustomButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 240, right: 20),
       child: MaterialButton(
           color: Colors.white,
-          onPressed: () {},
+          onPressed: onPressed,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -4,8 +4,10 @@ class CustomTextField extends StatelessWidget {
   CustomTextField({
     this.hintText,
     this.icon,
+    this.onChanged,
     super.key,
   });
+  Function(String)? onChanged;
   String? hintText;
   Icon? icon;
   @override
@@ -13,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: TextFormField(
+          onChanged: onChanged,
           decoration: InputDecoration(
             hintText: '$hintText',
             hintStyle: TextStyle(color: Colors.white),

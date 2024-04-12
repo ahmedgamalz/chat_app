@@ -1,11 +1,14 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/customWidgets/customButton.dart';
 import 'package:chat_app/customWidgets/customTextField.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
   static String id = 'register';
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,14 +16,14 @@ class RegisterPage extends StatelessWidget {
       body: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 70,
           ),
-          Image(
+          const Image(
             image: AssetImage('assets/images/scholar.png'),
             height: 100,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Scholar Chat',
@@ -30,7 +33,7 @@ class RegisterPage extends StatelessWidget {
                       fontSize: 25)),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           const Padding(
@@ -50,8 +53,16 @@ class RegisterPage extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontSize: 15),
             ),
           ),
-          CustomTextField(hintText: 'Email', icon: Icon(Icons.email)),
           CustomTextField(
+              onChanged: (data) {
+                email = data;
+              },
+              hintText: 'Email',
+              icon: Icon(Icons.email)),
+          CustomTextField(
+            onChanged: (data) {
+              password = data;
+            },
             hintText: 'Password',
             icon: const Icon(Icons.lock),
           ),
@@ -59,6 +70,32 @@ class RegisterPage extends StatelessWidget {
             height: 20,
           ),
           CustomButton(
+            onPressed: () async {
+              try {
+                var auth = FirebaseAuth.instance;
+                UserCredential user = await auth.createUserWithEmailAndPassword(
+                    email: email!, password: password!);
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'weak-password') {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Weak password'),
+                    ),
+                  );
+                } else if (e.code == 'email-already-in-use') {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Email already exists'),
+                    ),
+                  );
+                }
+              }
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Success'),
+                ),
+              );
+            },
             text: 'REGISTER',
           ),
           SizedBox(

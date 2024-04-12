@@ -59,6 +59,7 @@ class LoginPage extends StatelessWidget {
             height: 20,
           ),
           CustomButton(
+            onPressed: () {},
             text: 'LOGIN',
           ),
           SizedBox(
