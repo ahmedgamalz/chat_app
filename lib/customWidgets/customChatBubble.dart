@@ -1,11 +1,12 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/models/messageModel.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
-    super.key,
+    super.key, required this.message,
   });
-
+  final Message message;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,7 +21,7 @@ class ChatBubble extends StatelessWidget {
                 topLeft: Radius.circular(32)),
             color: kPrimaryColor),
         child: Text(
-          'Hi i\'m jimmy',
+          message.message,
           style: TextStyle(color: Colors.white),
         ),
       ),
