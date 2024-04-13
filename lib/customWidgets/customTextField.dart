@@ -5,16 +5,19 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.icon,
     this.onChanged,
+    this.obscureText,
     super.key,
   });
   Function(String)? onChanged;
   String? hintText;
   Icon? icon;
+  bool? obscureText;
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: TextFormField(
+          obscureText: obscureText!,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Field is required';

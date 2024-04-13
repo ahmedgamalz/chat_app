@@ -14,8 +14,9 @@ class ChatPage extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy(KCreatedAt).snapshots(),
+      stream: messages.orderBy(KCreatedAt, descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -45,23 +46,30 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    controller: _controller,
-                    itemCount: messagesList.length,
-                    itemBuilder: (context, index) => ChatBubble(
-                      message: messagesList[index],
-                    ),
-                  ),
+                      reverse: true,
+                      controller: _controller,
+                      itemCount: messagesList.length,
+                      itemBuilder: (context, index) {
+                        return messagesList[index].id == email
+                            ? ChatBubble(
+                                message: messagesList[index],
+                              )
+                            : ChatBubbleForFriend(message: messagesList[index]);
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
                     controller: controller,
                     onSubmitted: (value) {
-                      messages
-                          .add({KMessage: value, KCreatedAt: DateTime.now()});
+                      messages.add({
+                        KMessage: value,
+                        KCreatedAt: DateTime.now(),
+                        'id': email
+                      });
                       controller.clear();
                       _controller.animateTo(
-                        _controller.position.maxScrollExtent,
+                        0,
                         curve: Curves.easeOut,
                         duration: const Duration(milliseconds: 500),
                       );

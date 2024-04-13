@@ -73,12 +73,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               CustomTextFormField(
+                  obscureText: false,
                   onChanged: (data) {
                     email = data;
                   },
                   hintText: 'Email',
                   icon: Icon(Icons.email)),
               CustomTextFormField(
+                obscureText: true,
                 onChanged: (data) {
                   password = data;
                 },
@@ -113,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 text: 'REGISTER',
               ),
               SizedBox(
-                height: 140,
+                height: 100,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
